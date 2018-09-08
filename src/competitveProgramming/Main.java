@@ -1,52 +1,57 @@
 package competitveProgramming;
 
-import java.util.Arrays;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
 
 public class Main {
-    public static void main(String args[]) {
-        int arr[] = {1, 2, 3, 4, 5};
-        int sum = 5;
-        System.out.println(recursiveCountCoins(arr, sum, arr.length));
-        System.out.println(dpCoinChange(arr, sum, arr.length));
+
+    public static void main(String[] args) throws IOException {
+
+        Reader reader = new Reader(new InputStreamReader(System.in));
+        int t = reader.nextInt();
+
+
     }
 
-    private static int dpCoinChange(int[] arr, int sum, int length) {
-        int hash[][] = new int[length + 1][length + 1];
-        // first row
-        for (int i = 0; i < hash.length; i++) {
-            hash[i][0] = 0;
+
+    public static class Reader {
+        public BufferedReader reader;
+        public StringTokenizer st;
+
+        public Reader(InputStreamReader stream) {
+            reader = new BufferedReader(stream);
+            st = null;
         }
-        hash[0][0] = 1;
-        for (int i = 1; i < hash.length; i++) {
-            for (int j = 0; j < hash.length; j++) {
-                if (i > j) {
-                    hash[i][j] = hash[i - 1][j];
-                } else {
-                    hash[i][j] = hash[i - 1][j] + hash[i][j - 1];
+
+        public String next() {
+            while (st == null || !st.hasMoreTokens()) {
+                try {
+                    st = new StringTokenizer(reader.readLine());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
             }
-            System.out.println(Arrays.toString(hash[i]));
-        }
-        return hash[length][length];
-    }
-
-
-    private static int recursiveCountCoins(int[] arr, int sum, int length) {
-
-
-        if (sum == 0) {
-            return 1;
+            return st.nextToken();
         }
 
-        if (sum < 0)
-            return 0;
-
-        /* means there is only one item! so it is always one */
-        if (length == 1) {
-            return 1;
+        public int nextInt() {
+            return Integer.parseInt(next());
         }
 
-        return recursiveCountCoins(arr, sum, length - 1) +
-                recursiveCountCoins(arr, sum - arr[length - 1], length);
+        public String nextLine() throws IOException {
+            return reader.readLine();
+        }
+
+        public long nextLong() {
+            return Long.parseLong(next());
+        }
+
+        public double nextDouble() {
+            return Double.parseDouble(next());
+        }
+
     }
 }
+

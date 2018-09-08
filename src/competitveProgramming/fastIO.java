@@ -115,89 +115,84 @@ public class fastIO {
         }
     }
 
+    static boolean[] visited = null;
+    static List<Integer> arrayOfList[] = null;
+
     public static void main(String[] args) throws IOException {
         PrintWriter out = new PrintWriter(System.out);
         Reader reader = new Reader();
+
         int t = reader.nextInt();
-        int n = reader.nextInt();
+        while (t-- > 0) {
+            int string = reader.nextInt();
+            int a = reader.nextInt();
+            int h = reader.nextInt();
+            int lowest = Integer.MAX_VALUE;
+            Set<Integer> visited = new LinkedHashSet<>();
+            Queue<Integer> stack = new ArrayDeque<>();
+            stack.add(string);
+            while (!stack.isEmpty()) {
+                int currNumber = stack.remove();
+                if (!visited.contains(currNumber)) {
 
-        TreeMap<Integer, ArrayList<Integer>> map = new TreeMap<>();
-        for (int i = 0; i < n; i++) {
-            int fishSize = reader.nextInt();
-            int eatingFactor = reader.nextInt();
-
-            ArrayList<Integer> listTemp = null;
-            if (map.containsKey(eatingFactor)) {
-                listTemp = map.get(eatingFactor);
-                listTemp.add(fishSize);
-                Collections.sort(listTemp);
-                map.put(eatingFactor, listTemp);
-            } else {
-                listTemp = new ArrayList<>();
-                listTemp.add(fishSize);
-                map.put(eatingFactor, listTemp);
-            }
-        }
-
-        // System.out.println(map);
-
-        int count = 0;
-        int maxCount = 0;
-
-        Object[] keysetarr = map.keySet().toArray();
-        out.flush();
-
-        int start = 0;
-        int i = 1;
-        while (i < keysetarr.length) {
-            ArrayList<Integer> startList = map.get(keysetarr[start]);
-            if (startList.size() == 1) {
-                if (startList.get(0) <= (Integer) (keysetarr[i])) {
-                    maxCount = Math.max(maxCount, i - start);
-                    // System.out.println(count);
-                    count = count - 1;
-                    start++;
-                }
-                ++i;
-                ++count;
-            } else {
-                int j = 0;
-                while (j < startList.size()) {
-                    if (startList.get(j) <= (Integer) (keysetarr[i])) {
-                        maxCount = Math.max(maxCount, i - start);
-                        // System.out.println(count);
-                        count = count - 1;
+                    visited.add(currNumber);
+                    if (lowest > currNumber) {
+                        lowest = currNumber;
                     }
-                    ++count;
-                    ++j;
+                    int seraValue = seraDef(currNumber, h);
+                    int xhakaValue = xhakaDef(currNumber, a);
+
+                    if (!visited.contains(seraValue)) {
+                       // visited.add(seraValue);
+                        stack.add(seraValue);
+                    }
+
+                    if (!visited.contains(xhakaValue)) {
+                       // visited.add(xhakaValue);
+                        stack.add(xhakaValue);
+                    }
                 }
             }
+            System.out.println(visited.toString());
+            out.println(lowest);
         }
-        System.out.println((i - maxCount));
+        out.println();
+        out.flush();
+    }
 
+    private static int seraDef(int current, int h) {
+        String s = (current + "");
+        for (int i = 0; i < h; i++) {
+            char[] currNumber = s.toCharArray();
+            char[] newNumber = new char[currNumber.length];
+
+            for (int j = 0; j < currNumber.length; j++) {
+                if (j == currNumber.length - 1) {
+                    newNumber[0] = currNumber[j];
+                } else {
+                    newNumber[j + 1] = currNumber[j];
+                }
+            }
+
+            s = String.copyValueOf(newNumber);
+        }
+
+        return Integer.parseInt(s);
+    }
+
+    private static int xhakaDef(int s, int a) {
+        char[] charArray = (s + "").toCharArray();
+
+        for (int i = 1; i < charArray.length; i = i + 2) {
+            int charElement = Character.getNumericValue(charArray[i]);
+            charElement = (charElement + a) % 10;
+            charArray[i] = Character.forDigit(charElement, 10);
+        }
+
+        return Integer.parseInt(String.valueOf(charArray));
     }
 }
 
-/*
-
-1
-7
-1 4
-2 5
-3 3
-7 4
-7 4
-5 4
-7 8
-
-1
-3
-4 6
-5 4
-3 5
-
-
-*/
 
 /*
         int n = reader.nextInt();
@@ -221,5 +216,12 @@ public class fastIO {
         }
 */
 
-
+/*
+number of square numbers till n is floor(square root of n)
+number of cube numbers till n is floor(cube root of n)
+for(int i = 1; i <= 10; i++){
+    System.out.println(Math.pow(i, 6));
+    // prints every cubes of a number!! ie. x^6
+}
+*/
 

@@ -1,0 +1,17 @@
+directed
+6
+Page-A
+Page-B
+Page-C
+Page-D
+Page-E
+Page-F
+8
+Page-A Page-B
+Page-A Page-D
+Page-A Page-E
+Page-B Page-D
+Page-C Page-A
+Page-D Page-B
+Page-E Page-F
+Page-F Page-D

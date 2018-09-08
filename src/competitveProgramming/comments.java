@@ -21,3 +21,10 @@ public class comments {
  https://github.com/cytoscape/cytoscape.js (graph theory)
 
 */
+
+/*
+intellij shortcuts
+
+[Ctrl + Shift + Minus] (to fold the all javadocs + method implementations
+[Ctrl + Shift + N] (Go to a file or a folder)
+*/
