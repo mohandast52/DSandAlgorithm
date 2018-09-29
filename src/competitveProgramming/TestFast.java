@@ -132,6 +132,7 @@ public class TestFast {
         }
     }
 
+
     public void insert(String[] dict) {
         for (String key : dict) {
             TrieNode parent = root;

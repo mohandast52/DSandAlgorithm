@@ -1,8 +1,6 @@
 package competitveProgramming;
 
 
-//In submission class declaration should be default not public
-
 import java.util.*;
 import java.io.*;
 
@@ -16,56 +14,6 @@ public class Main {
     private static PrintWriter out;
     static int[][] s;
     static int n;
-
-    /*
-
-    */
-    private static void solution() {
-        int n = nextInt();
-        int[] arr = nextIntArray(n);
-        // System.out.println(Arrays.toString(arr));
-        System.out.println((largestNumber(arr)));
-    }
-
-
-    public static String largestNumber(final int[] A) {
-        ArrayList<Integer> list = new ArrayList<>();
-        StringBuffer answer = new StringBuffer();
-
-        for (int i = 0; i < A.length; i++) {
-            list.add(A[i]);
-        }
-
-        Collections.sort(list, (o1, o2) -> {
-            String s_1 = o1.toString();
-            String s_2 = o2.toString();
-            String case1 = s_1 + s_2;
-            String case2 = s_2 + s_1;
-            return case2.compareTo(case1);
-
-        });
-
-        for (int i = 0; i < list.size(); i++) {
-            answer.append(list.get(i));
-        }
-
-        while (answer.charAt(0) == '0' && answer.length() > 1) {
-            answer.delete(0, 1);
-        }
-
-        return answer.toString();
-    }
-
-    public static void main(String[] args) {
-        InputReader(System.in);
-        out = new PrintWriter(System.out);
-        solution();
-        out.close();
-    }
-
-
-    // To Get Input
-    // Some Buffer Methods
 
     public static void InputReader(InputStream stream1) {
         stream = stream1;
@@ -201,5 +149,34 @@ public class Main {
         public boolean isSpaceChar(int ch);
     }
 
+
+    /*
+
+    */
+
+    public static void main(String[] args) {
+        InputReader(System.in);
+        out = new PrintWriter(System.out);
+        solution();
+        out.close();
+    }
+
+    private static void solution() {
+        out.flush();
+    }
+
+// 3[a2[c]] 3[a]2[bc]3[xz]
 }
 
+/*
+long N = nextLong(); // readInput
+long M = nextLong();
+long L = nextLong();
+long A = nextLong();
+// TreeMap<Long, Long> map = new TreeMap<>();
+while (N-- > 0) {
+    long T = nextLong();
+    long Y = nextLong();
+}
+
+*/
